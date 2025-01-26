@@ -1,0 +1,140 @@
+
+
+/**
+ * Sample business network definition.
+ */
+namespace agri2
+
+
+asset process_type identified by process_type_id {
+   o String process_type_id
+   o String company_id
+   o String language_key_label
+}
+
+
+asset certification identified by certification_id {
+ o String certification_id
+ o String company_id
+ o DateTime certification_date
+ o DateTime expiration_date
+ o String language_key_label
+ o String s3_url
+}
+
+
+asset company identified by  company_id {
+  o String company_id
+  o String document_key
+  o String document_value
+  o String name
+  o String telephone
+  o String email
+  o process[] processes optional
+  o record[] records optional
+  o person_in_charge[] persons_in_charge optional
+  o storage_device_type[] storage_device_types optional
+}
+
+asset process identified by process_id {
+  o String process_id
+  o String language_key_label
+  o String company_id
+  o String in_loco
+}
+
+
+
+asset structure identified by structure_id {
+  o String structure_id
+  o String process_id
+  o String company_id
+  o String language_key_label
+  o String  structure_component
+  o String  structure_component_data
+  o String structure_is_required
+  o Integer structure_order
+  o String structure_type
+}
+
+asset record identified by record_id {
+   o String record_id
+   o String company_id
+   o String process_id
+   o String season_id
+   o DateTime sent_date_time
+   o DateTime record_date_time
+   o String person_in_charge_id
+   o String storage_device_origin_id
+   o String storage_device_destination_id
+}
+
+asset season identified by season_id {
+    o String season_id
+    o String company_id
+    o String culture_id
+    o String season_label
+    o String person_in_charge_id
+    o DateTime start_date_time
+    o DateTime end_date_time
+}
+
+asset culture identified by culture_id {
+  o String culture_id
+  o String language_key_label
+}
+
+
+
+participant person_in_charge identified by person_in_charge_id {
+  o String person_in_charge_id
+  o String company_id
+  o String name
+  o String email
+  o String language
+  o String document_key optional
+  o String document_value
+  o DateTime created_date_time
+}
+
+
+asset storage_device_type identified by storage_device_type_id {
+  o String storage_device_type_id
+  o String company_id
+  o String language_key_label
+  o String language_key_control
+  o storage_device[] storage_devices
+}
+
+asset storage_device identified by storage_device_id {
+  o String storage_device_id
+  o String storage_device_type_id
+  o String latitude
+  o String longitude
+  o String control_value
+}
+
+asset storage_device_file identified by storage_device_file_id {
+  o String storage_device_file_id
+  o String storage_device_id
+  o String s3_file_url
+  o String s3_file_sha_sum optional
+}
+
+asset language_key identified by language_key_id {
+	o String language_key_id
+    o String language_key
+    o String language_label
+    o String language
+}
+  
+  asset record_structure_value identified by record_structure_value_id {
+    o String record_structure_value_id
+    o String record_id
+    o String structure_id
+    o String record_value
+  }
+
+
+
+

@@ -1,0 +1,23 @@
+form {
+  padding: 10px;
+  margin: 10px auto;
+  width: 100%;
+}
+.form-group {
+  margin: 0 auto;
+  width: 40rem;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  // background: url(dropdown.ico) right / 20px no-repeat #fff;
+  padding-right: 20px;
+}
+
+@media only screen and (max-width: 770px) {
+  .form-group {
+    width: 100%;
+  }
+}

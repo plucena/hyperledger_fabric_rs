@@ -1,0 +1,456 @@
+/**
+ * Write your model definitions here
+ */
+
+namespace org.welight
+
+participant User identified by email {
+  o String email
+}
+asset SampleAsset identified by id {
+  o String id
+  o String value
+}
+transaction ChangeAssetValue {
+  o String newValue
+  --> Asset relatedAsset
+}
+
+asset DoadorPontosRecebidos identified by id {
+  o String id
+  --> Doador doador_id
+  o String source_model_name
+  o String source_model_id
+  o Integer pontos
+  o DateTime dt_created
+  o String origem
+}
+
+asset DoadorPontosDistribuidos identified by id {
+  o String id
+  --> Doador doador_id
+  --> Ong ong_id
+  o Integer pontos
+  o DateTime dt_created
+}
+
+asset OngPontosRecebidos identified by id {
+  o String id
+  --> Ong ong_id
+  o String source_model_name
+  o String source_model_id
+  o Integer pontos
+  o DateTime dt_created
+  o String origem
+}
+
+
+participant Afiliadora identified by id {
+  o String id
+  o String nome
+  o String pais
+  o Boolean ativo
+  o Integer fatura_dia_fechamento
+}
+
+asset TaxaAdm identified by id {
+  o String id
+  o String nome
+  o Boolean porcentagem
+  o Double taxa
+  o DateTime dt_updated
+  o DateTime dt_created
+  --> Afiliadora afiliadora_id
+}
+
+asset Fatura identified by id {
+  o String id
+  --> Afiliadora afiliadora_id
+  o Integer mes
+  o Integer ano
+  o DateTime dt_fechamento
+  o Integer qtde_compras
+  o String moeda
+  o Double total_fatura
+  o Double total_taxa_adm
+  o Double total_doacao_ong
+  o Boolean pagamento_conformado
+  o Boolean transferido_ong
+  o Boolean ativa
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset FaturaMoedaCotacao identified by id {
+  o String id
+  --> Fatura fatura_id
+  o String moeda
+  o Double cotacao_brl
+  o DateTime dt_created
+}
+
+asset FaturaMoeda identified by id {
+  o String id
+  --> Fatura fatura_id
+  o Integer comissao_moeda
+  o Double comissao_valor
+  o Double cotacao_brl
+  o Double total_fatura
+}
+
+asset FaturaPontoPool identified by id {
+  o String id
+  --> Fatura fatura_id
+  o Double porcentagem
+  o Double total_comissao_anonima
+  o Double total_comissao_nao_distribuida
+  o Double total_comissao_distribuida
+  o Double total_comissao_pool
+  o Integer total_doador_pontos_distribuidos
+  o Integer total_ong_pontos_recebidos
+  o Integer qtde_pontos_pool
+  o Double valor_ponto_pool
+}
+
+asset FaturaOngDistribuicao identified by id {
+  o String id
+  --> Fatura fatura_id
+  --> Ong ong_id
+  o String ong_nome 
+  o String ong_email 
+  o Integer pontos_ditribuicao
+  o Integer pontos_conquista
+  o Integer pontos_recebidos
+  o String moeda
+  o Double total_distribuicao_direta
+  o Double total_distribuicao_pool
+  o Double total_conquista
+  o Double total_doacao
+}
+
+asset FaturaTaxas identified by id {
+  o String id
+  --> Fatura fatura_id
+  o String nome
+  o Double taxa
+  o Boolean porcentagem
+  o Double total_taxa
+}
+
+asset FaturaCompras identified by id {
+  o String id
+  --> Fatura fatura_id
+  o Integer compra_id
+  o String compra_uid
+  --> Doador doador_id
+  o String doador_nome
+  o String doador_email
+  o Double doador_doacao_porcentagem
+  o String loja_id
+  o String loja_nome
+  o String compra_moeda
+  o Double compra_valor
+  o String comissao_moeda
+  o Double comissao_valor
+  o Double cotacao_brl
+  o Double comissao_valor_brl
+  o Double total_taxa_adm
+  o Double comissao_valor_total
+  o DateTime dt_compra
+  o DateTime dt_aprovacao
+}
+
+asset FaturaPontosDistribuidos identified by id {
+  o String id
+  --> Fatura fatura_id
+  --> Doador doador_id
+  o String doador_nome
+  o String doador_email
+  --> Ong ong_id
+  o String ong_nome
+  o String ong_email
+  o Integer pontos
+  o DateTime dt_distrinuicao
+}
+
+asset FaturaOngPontosRecebidos identified by id {
+  o String id
+  --> Fatura fatura_id
+  --> Ong ong_id
+  o String ong_nome
+  o String ong_email
+  o Integer pontos
+  o String origem
+  o DateTime dt_recebimento
+}
+
+asset FaturaDoadorStatus identified by id {
+  o String id
+  --> Fatura fatura_id
+  --> Doador doador_id
+  o Boolean ativo
+  o Integer compra_qtde
+  o Double doacao_porcentagem
+}
+
+asset FaturaComprasTaxas identified by id {
+  o String id
+  --> FaturaCompras fatura_compras_id
+  o String nome
+  o Double taxa
+  o Boolean porcentagem
+  o Double total_taxa
+  o Integer qtde_compras_fatura
+  o Double total_taxa_proporcional
+}
+
+asset FaturaDistribuicao identified by id {
+  o String id
+  --> Fatura fatura_id
+  --> Doador doador_id
+  o String doador_nome
+  o String doador_email
+  o Integer doador_pontos_distribuidos
+  o Double doador_comissao_total
+  o Double doador_impacto_porcentagem
+  o Double doador_comissao_parcial
+  o Double doador_ponto_valor
+  o Double pool_ponto_valor
+  --> Ong ong_id
+  o String ong_nome
+  o String ong_email
+  o Integer pontos
+  o String moeda
+  o Double total_doacao_ong
+  o Double total_doacao_direta
+  o Double total_doacao_pool
+}
+
+asset FaturaDistribuicaoOds identified by id {
+  o String id
+  --> FaturaDistribuicao fatura_distribuicao_id
+  --> Ods ods_id
+  o String ods_nome
+  o Double total_doacao_ods
+  o Double total_doacao_direta
+  o Double total_doacao_pool
+}
+
+asset OngOrigemCredito identified by id {
+  o String id
+  o String nome
+  o String token
+  o String grupo
+  o Integer source_id
+  --> Ong ong_id
+}
+
+asset OngCarteira identified by id {
+  o String id
+  --> Ong ong_id
+  --> OngOrigemCredito origem_credito_id
+  o Boolean credito
+  o String moeda
+  o Double valor
+  o String status
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngCarteiraCreditoFatura identified by id {
+  o String id
+  --> OngCarteira ong_carteira_id
+  o String tipo
+  o String fatura_id
+  o String fatura_ref
+  o String source_model_name
+  o String source_model_id
+  o DateTime dt_created
+}
+asset OngCarteiraCreditoCustom identified by id {
+  o String id
+  --> OngCarteira ong_carteira_id
+  o String user_id
+  o String user_name
+  o String user_email
+  o String carteira_debito_id
+  o DateTime dt_created
+}
+asset OngCarteiraTransferencia identified by id {
+  o String id
+  --> OngCarteira ong_carteira_id
+  o String banco_id
+  o String banco_codigo
+  o String banco_nome
+  o String agencia
+  o String agencia_digito
+  o String conta_corrente
+  o String conta_corrente_digito
+  o String pessoa_fisica
+  o String titular
+  o String cpf_cnpj
+  o DateTime dt_created
+}
+
+asset OngProjeto identified by id {
+  o String id
+  --> Ong ong_id
+  o String nome
+  o String descricao
+  o String img_capa
+  o Boolean periodo_continuo
+  o DateTime dt_inicio
+  o DateTime dt_fim
+  o Boolean sem_local
+  o String sem_local_obs
+  o Boolean ativo
+  o Boolean inicializado
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngProjetoSobre identified by id {
+  o String id
+  --> OngProjeto ong_projeto_id
+  o String problema
+  o String impacto
+  o String meta
+  o String como_alcancar_meta
+  o String como_medir_impacto
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngProjetoEndereco identified by id {
+  o String id
+  --> OngProjeto ong_projeto_id
+  o String cep
+  o String rua
+  o String numero
+  o String complemento
+  o String bairro
+  o String cidade
+  o String estado
+  o String pais
+  o String coordenadas
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngProjetoEntrega identified by id {
+  o String id
+  --> OngProjeto ong_projeto_id
+  o String titulo
+  o String descricao
+  o Boolean ativo
+  o DateTime dt_entrega
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngProjetoEntregaComprovante identified by id {
+  o String id
+  --> OngProjetoEntrega projeto_entrega_id
+  o String titulo
+  o String descricao
+  o String comprovante
+  o DateTime dt_created
+}
+
+asset OngProjetoEntregaEndereco identified by id {
+  o String id
+  --> OngProjetoEntrega projeto_entrega_id
+  --> OngProjetoEndereco projeto_endereco_id
+  o DateTime dt_created
+}
+
+asset OngProjetoOds identified by id {
+  o String id
+  --> OngProjeto ong_projeto_id
+  --> Ods ods_id
+  o DateTime dt_created
+}
+
+asset OngRecurso identified by id {
+  o String id
+  --> Ong ong_id
+  --> OngProjeto ong_projeto_id optional
+  o String destino
+  o Boolean ativo
+  o DateTime dt_aplicacao
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset OngRecursoComprovante identified by id {
+  o String id
+  --> OngRecurso ong_recurso_id
+  o String titulo
+  o String descricao
+  o String comprovante
+  o DateTime dt_created
+}
+
+asset OngRecursoDoacao identified by id {
+  o String id
+  --> OngRecurso ong_recurso_id
+  --> OngOrigemCredito origem_credito_id
+  o String moeda
+  o Double valor
+  o DateTime dt_updated
+  o DateTime dt_created
+}
+
+asset Ods identified by id {
+  o String id
+  o String tipo
+  o String nome
+  o String descricao
+  o String objetivo
+  o String fatos
+  o String metas
+  o DateTime dt_created
+}
+
+participant Doador identified by id {
+  o String id
+  o String nome
+  o String email
+  o Boolean avaliador
+  o Boolean empresa
+  o DateTime dt_created
+}
+
+participant Ong identified by id {
+  o String id
+  o String nome
+  o String email
+  o String razao_social
+  o String cnpj
+  o DateTime dt_created
+}
+
+participant DoadorEmpresa identified by id {
+  o String id
+  o String nome
+  o String email
+  o Boolean empresa
+  o DateTime dt_created
+  o String website
+  --> Doador doador_id
+  o String cnpj
+}
+
+participant DoadorConvidado identified by id {
+  o String id
+  --> Doador doador_id
+  --> Doador convidado_id
+  o DateTime dt_created
+}
+
+participant OngConvidado identified by id {
+  o String id
+  --> Ong ong_id
+  --> Doador convidado_id
+  o DateTime dt_created
+}

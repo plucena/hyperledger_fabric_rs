@@ -1,0 +1,112 @@
+@import './shared';
+
+.JsonTree-Tree {
+	/* background: #eee; */
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  /* width: 500px; */
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 100px; */
+  /* box-shadow: 0 0 10px #ccc; */
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .JsonTree-Tree {
+    padding: 0;
+  }
+}
+
+.JsonTree-Node-Item {
+  margin: 3px 0 3px 0;
+}
+
+.JsonTree-Node-Value-Image, .JsonTree-Node-Value-Video {
+  @extend .JsonTree-Node-Item;
+  width: 100%;
+  height: 300px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.frame {
+  width: 2600px;
+  height: 1500px;
+  border: 0;
+  -ms-transform: scale(0.25);
+  -moz-transform: scale(0.25);
+  -o-transform: scale(0.25);
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  
+  -ms-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+
+.JsonTree-Node-Key {
+	display: inline-block;
+	vertical-align: top;
+  color: $body-color;
+  font-weight: 700;
+}
+
+.JsonTree-Node-Key a{
+	text-decoration: none;
+	color: $body-color;
+}
+
+.JsonTree-Node-Value {
+	display: inline-block;
+	margin-left: 10px;
+  vertical-align: top;
+}
+.JsonTree-Node-Value.child-element {display: block;}
+
+.JsonTree-Node-Value.hidden {display: none;}
+
+.JsonTree-Node-Value-String { color: $body-color; }
+
+.JsonTree-Node-Value-String a { color: $link-color; }
+
+.JsonTree-Node-Value-Number { color: $body-color; }
+
+.JsonTree-Node-Value-Func { color: $body-color; }
+.JsonTree-Node-Value-Func-Line {margin-left: 15px;}
+.JsonTree-Node-Value-Func-Line:first-child {margin-left: 0}
+.JsonTree-Node-Value-Func-Line:last-child {margin-left: 0}
+
+.Collapsable-Arrow {
+	text-decoration: none;
+	color: $body-color;
+	font-size: 85%;
+	display: inline-block;
+	width: 15px;
+  height: 15px;
+  margin-left: 0;
+  margin-right: 4px;
+
+	transform: rotate(-90deg);
+  transition: transform 0.2s ease-out;
+}
+
+.Collapsable-Arrow.Open {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease-out;
+}
+
+.Collapsable-Content {
+	display: block;
+}
+
+.Collapsable-Content.Hidden {
+	display: none;
+}

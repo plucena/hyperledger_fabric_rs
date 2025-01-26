@@ -1,0 +1,21 @@
+applications:
+  # PROD
+  - name: moedaseeds
+    instances: 3
+    timeout: 180
+    buildpack: sdk-for-nodejs
+    command: 'npm prune --production && NODE_ENV=production npm start'
+    memory: 256M
+    routes:
+    - route: moedaseeds.mybluemix.net
+  # DEV
+  - name: moeda-dev
+    instances: 2
+    timeout: 180
+    buildpack: sdk-for-nodejs
+    command: 'npm prune --production && NODE_ENV=production npm start'
+    memory: 256M
+    routes:
+    - route: moeda-dev.mybluemix.net
+    env:
+      BCAPI_URL_DEV: 1

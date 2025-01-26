@@ -1,0 +1,30 @@
+
+#tx-info .card-body {
+    max-height: 40em;
+    overflow-y: auto;
+}
+.txs-list {
+    list-style-type: none;
+    padding: 0;
+}
+.txs-list li {
+    border: 1px solid #c7cfcf;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+    padding: 7px;
+    box-shadow: 0 0 1px 0px #30303036;
+}
+.txs-list li:hover {
+    box-shadow: 0 0 7px 0 #303030;
+}
+.txs-list li a {
+    color: inherit;
+}
+.txs-list li a:hover {
+    text-decoration-line: none;
+}
+.txs-list li p {
+    font-size: 14px;
+    margin: 0 5px;
+}

@@ -1,0 +1,12 @@
+
+html,
+body {
+  height: 100%;
+}
+
+@media screen and (max-width: 760px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+

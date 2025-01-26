@@ -1,0 +1,71 @@
+@import './shared';
+
+.step-progressbar {
+  padding: 15px 0 30px 0;
+  margin: 20px 30px 30px 30px;
+}
+
+@media only screen and (max-width: 900px) {
+  .step-progressbar {
+    padding: 20px 0;
+    margin: 20px 20px 35px 20px;
+  }
+  .cstep {
+    width: 28px !important;
+  }
+}
+ 
+.step-content {
+  width: 90px;
+  height: 100px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  
+  &:hover {
+    box-shadow: $step-border-shadow;
+  }
+
+  .step-img {
+    .step-icon {
+      margin: 0 auto;
+      color: $light-green;
+    }
+  }
+  .step-caption {
+    height: 50%;
+    padding: 10px 0;
+    .caption {
+      text-align: center;
+      margin: 0 auto;
+      font-size: 14px;
+    }
+  }
+}
+
+.cstep.step-clicked {
+  background: $white;
+  box-shadow: $step-border-shadow;
+}
+
+.phase-indicator {
+  margin: 0;
+  cursor: default;
+
+  .phase-caption {
+    color: #aaaaaa;
+  }
+
+  .phase-bar {
+    margin: 0;
+    width: 2px;
+    height: 100%;
+    background: #aaaaaa;
+  }
+  &:hover {
+    box-shadow: none;
+  }
+}
