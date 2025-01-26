@@ -1,0 +1,8 @@
+
+#block-info label {
+    font-weight: bold;
+    text-align: end;
+}
+#block-info input[readonly] {
+    background-color: transparent;
+}

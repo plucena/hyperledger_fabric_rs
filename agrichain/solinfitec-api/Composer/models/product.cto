@@ -1,0 +1,307 @@
+namespace agritech 
+
+enum ProcessType {
+o PROCESS_1
+o PROCESS_2
+o PROCESS_3
+}
+
+enum PhaseType {
+o PHASE_1
+o PHASE_2
+o PHASE_3
+}
+
+enum AnalysisType {
+o ANALYSIS_1
+o ANALYSIS_2
+o ANALYSIS_3
+}
+
+enum StorageType {
+  o STORAGE_1
+  o STORAGE_2
+  o STORAGE_3
+}
+
+enum CropType {
+  o CROP1
+  o CROP2
+  o CROP3
+}
+
+enum VenueType {
+  o VENUETYPE1
+  o VENUETYPE2
+  o VENUETYPE3
+}
+
+
+
+participant person_in_charge identified by person_id {
+  o String person_id
+  o company company
+  o String name
+  o String email
+}
+
+concept log {
+  o String process
+  o String latitude
+  o String longitude
+  o DateTime date_time 
+  
+}
+
+/*
+asset person_history identified by person_id {
+  o String person_id
+  o company company
+  o String name
+  o String email
+  o location[] locations
+ }
+*/
+
+
+concept location {
+  o String latitude
+  o String longitude
+  o DateTime date_time
+}
+
+
+
+participant company identified by company_id {
+  o String company_id
+  o String document_key
+  o String document_value
+  o String name
+  o String telephone
+  o String email
+}
+
+
+
+participant laboratory identified by laboratory_id{
+  o String laboratory_id
+  o String name
+  o person_in_charge person_in_charge
+  o String document_key
+  o String document_value
+  o String telephone
+  o String email
+}
+
+asset product identified by product_id {
+  o String product_id
+  o person_in_charge person_in_charge
+  o DateTime date_time_start 
+  o DateTime date_time_end
+  o season[] seasons  optional
+}   
+
+
+
+asset venue identified by venue_id {
+  o String venue_id
+  o person_in_charge person_in_charge
+  o company company
+  o String zone_id 
+}
+
+
+asset analysis identified by analysis_id {
+  o String analysis_id
+  o String contract_id
+  o DateTime analysis_date
+  o DateTime sample_gathering_date
+  o person_in_charge person_in_charge
+  o storage_device storage_device
+  o laboratory laboratory
+  o Boolean approval
+  o analysis_field[]  fields
+  o image[] images
+  o log log
+}
+
+
+concept analysis_field {
+  o String key
+  o String value
+}
+
+
+
+concept input  {
+  o String input_id
+  o person_in_charge person_in_charge
+  o String label
+  o String invoice_number
+  o DateTime manufacture_date
+  o DateTime expiration_date
+  o String batch_number
+}
+
+concept input_application {
+  o String input_application_id
+  o DateTime date_time
+  o person_in_charge person_in_charge
+  o storage_device storage_device
+  o input input
+  o log log
+}
+
+asset season identified by season_id {
+  o String season_id
+  o person_in_charge person_in_charge
+  o DateTime date_time_start 
+  o DateTime date_time_end
+  o field[] fields optional
+  o analysis[] analysis optional
+  o transport[] transports optional
+  o input_application[] input_applications optional
+}
+
+
+asset field identified by field_id {
+  o String field_id
+  o String field_description
+  o person_in_charge person_in_charge
+  o String unit
+  o String unit_description
+  o String zone
+  o String zone_description
+  o String farm
+  o String farm_description
+  o String field
+}
+
+
+concept transport {
+    o person_in_charge person_in_charge
+    o String transport_id
+    o DateTime transport_date
+    o String contract_id
+    o storage_device origin
+    o storage_device destination
+    o log log
+}
+
+
+concept  storage_device   {
+  o String storage_device_id
+  o person_in_charge person_in_charge
+  o String storage_device_type
+  o String latitude
+  o String longitude
+  o String label
+  o String control_key
+  o String control_value
+  o String seal
+  o field field optional 
+  o image[] images
+}
+
+
+concept image {
+  o String image_id
+  o String s3_image_url 
+  o String s3_image_shasum
+}
+  
+
+
+transaction  season_push_input_application {
+  o String season_id
+  o String input_application_id
+  o DateTime date_time
+  o person_in_charge person_in_charge
+  o storage_device storage_device
+  o input input
+  o log log
+}
+
+
+transaction season_push_transport {
+  o String season_id
+  o person_in_charge person_in_charge
+  o String transport_id
+  o String contract_id
+  o DateTime transport_date
+  o  storage_device origin
+  o  storage_device destination
+  o log log
+}
+
+
+transaction  season_push_analysis {
+  o String season_id 
+  o String analysis_id
+  o String contract_id
+  o DateTime analysis_date
+  o DateTime sample_gathering_date
+  o person_in_charge person_in_charge
+  o storage_device storage_device
+  o laboratory laboratory
+  o Boolean approval
+  o analysis_field[]  fields
+  o image[] images
+  o log log
+}
+
+transaction season_creation{
+  o String season_id
+  o person_in_charge person_in_charge
+  o DateTime date_time_start 
+  o DateTime date_time_end
+}
+
+transaction season_push_field {
+  o String season_id
+  o String field_id
+}
+
+
+transaction venue_creation {
+  o String venue_id
+  o person_in_charge person_in_charge
+  o String company_id
+  o String zone_id 
+}
+
+
+
+transaction product_creation {
+  o String product_id
+  o person_in_charge person_in_charge
+  o DateTime date_time_start 
+  o DateTime date_time_end
+  o season[] seasons  optional
+}
+
+
+transaction product_push_season {
+  o String product_id
+  o String season_id 
+}
+
+
+
+transaction field_creation {
+  o String field_id
+  o String field_description
+  o person_in_charge person_in_charge
+  o String unit
+  o String unit_description
+  o String zone
+  o String zone_description
+  o String farm
+  o String farm_description
+  o String field
+} 
+
+transaction delete_all {
+  
+}
+  

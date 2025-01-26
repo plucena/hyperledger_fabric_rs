@@ -1,0 +1,119 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Sample business network definition.
+ */
+namespace agri2
+
+asset _company identified by company_id {
+  o String company_id
+  o String document_key
+  o String document_value
+  o String name
+  o String telephone
+  o String email
+  o _process[] processes optional
+  o _record[] records optional
+  o _person_in_charge[] persons_in_charge optional
+  o _storage_device_type[] storage_device_types optional
+}
+
+asset _process identified by process_id {
+  o String process_id
+  o String process_label
+  o String company_id
+  o _structure[] structures
+  o _record[] records
+}
+
+
+asset _structure identified by structure_id {
+  o String structure_id
+  o String process_id
+  o String structure_key
+  o String structure_type
+}
+
+asset _record identified by record_id {
+   o String record_id
+   o String season_id
+   o String process_id
+   o String company_id
+   o String person_in_charge_id
+   o String storage_device_orign_id
+   o DateTime sent_date_time
+   o DateTime record_date_time
+}
+
+asset _season identified by season_id {
+    o String season_id
+    o String company_id
+    o String person_in_charge_id
+    o DateTime sent_date_time
+    o DateTime record_date_time
+    o _culture culture
+}
+
+asset _culture identified by culture_id {
+  o String culture_id
+  o String culture_label
+}
+
+participant _person_in_charge identified by person_in_charge_id {
+  o String person_in_charge_id
+  o String company_id
+  o String name
+  o String email
+  o String public_key optional
+  o DateTime created_date_time
+}
+
+
+asset _storage_device_type identified by storage_device_type_id {
+  o String storage_device_type_id
+  o String storage_device_type_label
+  o String company_id
+}
+
+asset _storage_device identified by storage_device_id {
+  o String storage_device_id
+  o String storage_device_type_id
+  o String latitude
+  o String longitude
+  o String label
+  o String control_key
+  o String control_value
+  o String seal
+  o _image[] images optional
+}
+
+asset _image identified by storage_device_image_id {
+  o String storage_device_image_id
+  o String storage_device_id
+  o String s3_image_url
+  o String s3_image_sha_sum
+}
+
+  
+  asset _record_structure_value identified by record_structure_value_id {
+    o String record_structure_value_id
+    o String record_id
+    o String structure_id
+    o String record_value
+  }
+
+
+
+
