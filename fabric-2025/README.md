@@ -36,7 +36,7 @@
 
      ./network.sh cc list -org 1
 
- **Initialize chaincoe**
+ **Initialize chaincode**
 
      ./network.sh cc invoke -c mychannel  -ccic '{"function":"InitLedger","Args":[]}'
 
