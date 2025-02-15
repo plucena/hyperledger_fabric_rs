@@ -45,4 +45,4 @@
 
 
 **INVOKE CHAINCODE**
- ./network.sh cc invoke -c mychannel  -ccic '{"Args":["CreateAsset","asset100","red","10","fred","500"]}'
+     ./network.sh cc invoke -c mychannel  -ccic '{"Args":["CreateAsset","asset100","red","10","fred","500"]}'
