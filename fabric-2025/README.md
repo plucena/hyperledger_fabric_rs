@@ -13,9 +13,9 @@
 
 **binaries are now on , add to PATH edit .bashrc and add:**
 
-    export PATH=$PATH:~/hyperledger-fabric/fabric-samples/bin
+    export PATH=$PATH:~hyperledger_fabric_rs/fabric-2025/bin
 
-    cd :~/hyperledger-fabric/fabric-samples/test-network
+    cd :~hyperledger_fabric_rs/fabric-2025/test-network
 
 **start network and cereate mychannel**
 
