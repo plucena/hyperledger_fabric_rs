@@ -1,10 +1,11 @@
 # hyperledger-fabric Version: 2.4.6 - Linux
+    clone this repo
 
 **install default fabric peers and docker images - make sure deps are Ok docker, golang, etc**
 
     curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh
 
-    cd hyperledger-fabric/fabric samples
+    cd hhyperledger_fabric_rs/fabric-2025
 
 **install binaries and dockers**
 
