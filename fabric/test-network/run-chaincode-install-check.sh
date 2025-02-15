@@ -1,1 +1,0 @@
- peer lifecycle chaincode queryinstalled

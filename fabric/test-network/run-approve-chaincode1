@@ -1,1 +1,0 @@
-peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID hometransfer --name HomeTransfer --version 1.0 --init-required --package-id hometransfer_1:21eca37f8b0d091d94ac7c310cd52b6bf2a1401837aa0fb99b90a73f76d4c083 --sequence 1
