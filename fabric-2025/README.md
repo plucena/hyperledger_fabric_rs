@@ -23,6 +23,8 @@
     
     ./network.sh up createChannel -c mychannel
 
+**enable logging console**
+
     ./monitordocker.sh fabric_test
 
 
