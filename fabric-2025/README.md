@@ -1,4 +1,4 @@
-# hyperledger-fabric Version: 2.4.6 - Linux
+# hyperledger-fabric - using test-network scripts to package, approve, commit chaincode 
     clone this repo
 
 **install default fabric peers and docker images - make sure deps are Ok docker, golang, etc**
